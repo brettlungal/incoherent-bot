@@ -9,7 +9,7 @@ class Poll(commands.Cog):
 
     @commands.command(pass_context=True)
     async def brig(self, ctx, offender:discord.Member):
-        # message = await ctx.send(f"```{offender} has been voted to the brig!```\n**✅ = Yes**\n**❎ = No**")
+        # TODO break embed generation into functions to clean up code
         embed = discord.Embed(title=f"{offender} Has Been Voted To The Brig!", color=discord.Color.brand_red())
         embed.set_thumbnail(url=offender.avatar.url)
         embed.add_field(name="The Crew Must Vote", value="React with ✅ to vote yes, and ❎ to vote no")
