@@ -2,7 +2,7 @@ import pafy
 import discord
 from discord import FFmpegPCMAudio, PCMVolumeTransformer
 from discord.ext import commands
-from constants import FFMPEG_OPTIONS
+from utils.constants import FFMPEG_OPTIONS
 import urllib
 import re
 
