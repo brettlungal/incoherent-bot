@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from asyncio import sleep
+from utils.embeds import *
 
 class Poll(commands.Cog):
 
@@ -10,28 +11,24 @@ class Poll(commands.Cog):
     @commands.command(pass_context=True)
     async def brig(self, ctx, offender:discord.Member):
         # TODO break embed generation into functions to clean up code
-        embed = discord.Embed(title=f"{offender} Has Been Voted To The Brig!", color=discord.Color.brand_red())
-        embed.set_thumbnail(url=offender.avatar.url)
-        embed.add_field(name="The Crew Must Vote", value="React with ✅ to vote yes, and ❎ to vote no")
-        message = await ctx.send(embed=embed)
+        vote_embed = generate_vote_embed(offender)
+        message = await ctx.send(embed=vote_embed)
         await message.add_reaction('❎')
         await message.add_reaction('✅')
-        await sleep(45)
+        await sleep(120)
         cache_msg = discord.utils.get(self.bot.cached_messages, id=message.id)
-        most_voted = max(cache_msg.reactions, key=lambda r: r.count)
         no_votes = cache_msg.reactions[0].count
         yes_votes = cache_msg.reactions[1].count
         if yes_votes > no_votes:
-            brigged_embed = discord.Embed(title=f"{offender} has been brigged and stripped of all roles!", color=discord.Color.dark_orange())
-            brigged_embed.set_thumbnail(url='https://www.pngkey.com/png/full/7-76501_jail-clipart-internment-camp-im-the-daddy-coffee.png')
+            brigged_embed = generate_brigged_embed(offender)
             await self.strip_roles(offender)
             await ctx.send(embed=brigged_embed)
+        elif no_votes > yes_votes:
+            negative_embed = generate_negative_vote_embeded(offender)
+            await ctx.send(embed=negative_embed)
         elif no_votes == yes_votes:
-            # Tie!
-            tie_embed = discord.Embed(title=f"Vote was a tie - {offender} goes free!", color=discord.Color.green())
-            tie_embed.set_thumbnail(url=offender.avatar.url)
+            tie_embed = generate_tie_embed(offender)
             await ctx.send(embed=tie_embed)
-        print(most_voted)
 
     async def strip_roles(self, user: discord.Member):
         for i in user.roles:
