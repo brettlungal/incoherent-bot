@@ -10,6 +10,7 @@ bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 async def on_ready():
     await bot.load_extension("cogs.music")
     await bot.load_extension("cogs.poll")
+    await bot.load_extension("cogs.misc")
     print("bot is online")
     
 

@@ -23,3 +23,9 @@ def generate_tie_embed(offender):
     tie_embed.set_thumbnail(url=offender.avatar.url)
     tie_embed.add_field(name=f"{offender} did not warrant enough of a threat to sway the crew", value=".")
     return tie_embed
+
+def generate_idea_embed(idea):
+    idea_embed = discord.Embed(title=f"The Crews Orders...", color=discord.Color.yellow())
+    idea_embed.set_thumbnail(url="https://www.clipartmax.com/png/small/150-1502514_kowalski-penguin-madagascar-dreamworks-wallpaper-penguins-from-madagascar-salute.png")
+    idea_embed.add_field(name=idea['name'], value=idea['desc'])
+    return idea_embed
