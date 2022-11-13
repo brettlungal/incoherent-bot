@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 import os
 from dotenv import load_dotenv
-import asyncio
 
 bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 

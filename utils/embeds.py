@@ -14,7 +14,7 @@ def generate_brigged_embed(offender):
 
 def generate_negative_vote_embeded(offender):
     negative_embed = discord.Embed(title="Mercy Has Been Shown", color=discord.Color.green())
-    negative_embed.set_thumbnail(url='https://www.clipartmax.com/png/small/231-2315140_the-gallery-for-gavel-clipart-transparent-judge-gavel-png.png')
+    negative_embed.set_thumbnail(url='https://cdn.discordapp.com/attachments/619699978498998294/1041459549577678949/gavel.png')
     negative_embed.add_field(name=f"{offender} has avoided the chopping block", value=".")
     return negative_embed
 
@@ -26,6 +26,22 @@ def generate_tie_embed(offender):
 
 def generate_idea_embed(idea):
     idea_embed = discord.Embed(title=f"The Crews Orders...", color=discord.Color.yellow())
-    idea_embed.set_thumbnail(url="https://www.clipartmax.com/png/small/150-1502514_kowalski-penguin-madagascar-dreamworks-wallpaper-penguins-from-madagascar-salute.png")
+    idea_embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/619699978498998294/1041458966573613207/penguins.png")
     idea_embed.add_field(name=idea['name'], value=idea['desc'])
+    return idea_embed
+
+def generate_sink_embed(boatname):
+    boatname = boatname if boatname is not None else "Unnamed Ship"
+    idea_embed = discord.Embed(title="Another Crew Fucked Around and Found Out", color=discord.Color.green())
+    idea_embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/619699978498998294/1041473586818469998/sinking.png")
+    idea_embed.add_field(name=boatname, value="Another crew falls victim to the feared crew of the Black Sieve!")
+    return idea_embed
+
+def generate_sink_count_embed(count):
+    if count == 1:
+        msg = f"{count} Boat Has Fucked Around and Found Out"
+    else:
+        msg = f"{count} Boats Have Fucked Around and Found Out"
+    idea_embed = discord.Embed(title=msg, color=discord.Color.green())
+    idea_embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/619699978498998294/1041476781556895825/pirate.png")
     return idea_embed
