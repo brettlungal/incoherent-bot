@@ -45,3 +45,12 @@ def generate_sink_count_embed(count):
     idea_embed = discord.Embed(title=msg, color=discord.Color.green())
     idea_embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/619699978498998294/1041476781556895825/pirate.png")
     return idea_embed
+
+def generate_sink_list_embed(sinks):
+    idea_embed = discord.Embed(title="Boats Sunk Report", color=discord.Color.blurple())
+    idea_embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/619699978498998294/1041473586818469998/sinking.png")
+    if len(sinks) == 0:
+        idea_embed.add_field(name="No Boats Sunk!", value="Get out there and cause some mayhem!!")
+    else:
+        idea_embed.add_field(name="Boats Sunk:", value='\n'.join([boat for boat in sinks]), inline=False)   
+    return idea_embed

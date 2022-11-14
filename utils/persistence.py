@@ -11,6 +11,18 @@ class Persistence:
         self.cursor.execute(query_string)
         count = self.cursor.fetchone()
         return int(count[0])
+    
+    def list_sinks(self) -> list:
+        query_string = f"SELECT boatname FROM sinks"
+        self.cursor.execute(query_string)
+        ships = self.cursor.fetchall()
+
+        return_list = []
+        for ship in ships:
+            ship_formatted = str(ship).replace("(", "").replace(")", "").replace("'","").replace(",","")
+            return_list.append(ship_formatted)
+        
+        return return_list
 
     def add_sink(self, boatname=None) -> None:
         if boatname is None:

@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import random
 from utils.constants import IDEA_LIST
-from utils.embeds import generate_idea_embed, generate_sink_embed, generate_sink_count_embed
+from utils.embeds import *
 from utils.persistence import Persistence
 import mysql.connector
 import os
@@ -28,10 +28,16 @@ class Misc(commands.Cog):
         await ctx.send(embed=sink_embed)
     
     @commands.command()
-    async def sinkcount(self,ctx):
+    async def sinkcount(self, ctx):
         count = self.data_persistence.get_sink_count()
         count_embed = generate_sink_count_embed(count)
         await ctx.send(embed=count_embed)
+    
+    @commands.command()
+    async def sinklist(self, ctx):
+        sinks = self.data_persistence.list_sinks()
+        list_embed = generate_sink_list_embed(sinks)
+        await ctx.send(embed=list_embed)
 
 async def setup(bot):
     await bot.add_cog(Misc(bot))
